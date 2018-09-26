@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
+#include <stdexcept>
 
 using std::cout;
 using std::cin;
@@ -12,15 +13,21 @@ using std::setw;
 using std::ofstream;
 using std::ifstream;
 using std::to_string;
+using std::ostream;
+
+const int LEFT = 1;
+const int RIGHT= 2;
+const int CENTER = 3;
 
 int squareNumbers(int number);
 double totalGrade(int fg, int ca);
 string::size_type longestString(string lines[], int lengthArray);
-void frame(string arr[], int length);
-void frame(string arr[], int length, int alignment = 1);
-void doubleIntValueRef(int num);
-void doubleIntValueVal(int &num);
+//void frame(string arr[], int length);
+void frame(string arr[], int length, int alignment = LEFT);
+void doubleIntValueRef(int &num);
+void doubleIntValueVal(int num);
 string StringPadding(string original, size_t charCount);
+
 
 
 //ex 1
@@ -154,31 +161,27 @@ int main6()
 	return 0;
 }
 //ex 10 11
-int main7()
+int main1011()
 {
-	string lines[] = { "hello", "i am here", "where are you now?", "over yonder" };
-	cout << "max length is: " << longestString(lines, 4)<< endl;
-	frame(lines, 4,1);
-	frame(lines, 4, 2);
-	frame(lines, 4, 3);
+	try {
+		//string lines[1] = {};
+		string lines[] = { "hello", "i am here", "where are you now?", "over yonder" };
+		//cout << "max length is: " << longestString(lines, 4) << endl;
+		frame(lines, 4);
+		frame(lines, 4, RIGHT);
+		frame(lines, 4, CENTER);
+		frame(lines, 4);
+	}
+	catch (std::logic_error e)
+	{
+		cout << e.what();
+	}
+
+	
 
 	system("pause");
 	return 0;
 }
-//ex 12
-int main8(){
-	int num= 20;
-	//ref
-	doubleIntValueRef(num);
-
-	//value
-	doubleIntValueVal(num);
-	system("pause");
-	return 0;
-}
-
-
-
 //ex5
 int squareNumbers(int number)
 {
@@ -189,10 +192,14 @@ double totalGrade(int fg, int ca)
 {
 	return (fg *.6) + (ca * 0.4);
 }
-
+//ex8
 //string::size_type longestString(string (&lines)[], int lengthArray)
 string::size_type longestString(string lines[], int lengthArray)
 {
+	if (lengthArray == 0)
+	{
+		throw std::logic_error("no data in array");
+	}
 	if (lengthArray > 0)
 	{
 		string::size_type max = lines[0].length();
@@ -208,6 +215,7 @@ string::size_type longestString(string lines[], int lengthArray)
 	
 }
 //esercisse 9
+/*
 void frame(string arr[], int length)
 {
 	string::size_type max = longestString(arr, length);
@@ -221,6 +229,7 @@ void frame(string arr[], int length)
 	}
 	cout << top << endl;
 }
+*/
 //exercise 11
 void frame(string arr[], int length, int alignment)
 {
@@ -230,16 +239,17 @@ void frame(string arr[], int length, int alignment)
 
 	cout << top << endl;
 	for (int i = 0; i < length; i++) {
-		if (alignment == 1) {
+		if (alignment == LEFT) {
 			string::size_type paddL = max - arr[i].length();
 			cout << "* " << arr[i] << string(paddL, ' ') << " *" << endl;
 		}
-		else if (alignment == 2)
+		else if (alignment == RIGHT)
 		{
 			string::size_type paddL = max - arr[i].length();
 			cout << "* " << string(paddL, ' ') << arr[i] << " *" << endl;
 		}
-		else {
+		else if(alignment == CENTER)
+		{
 			string::size_type diff = (max - arr[i].length());
 			string::size_type paddL = diff / 2;
 			string::size_type paddR = diff - paddL;
@@ -250,20 +260,35 @@ void frame(string arr[], int length, int alignment)
 	cout << top << endl;
 }
 
+
+//ex 12
+int main12() {
+	int num = 20;
+	cout << "num: " << num << endl;
+	//ref
+	doubleIntValueRef(num);
+
+	//value
+	doubleIntValueVal(num);
+	system("pause");
+	return 0;
+}
+
 //ex12 pass by reference
-void doubleIntValueRef(int num)
+void doubleIntValueRef(int &num)
 {
 	cout << num << " *2= " << num * 2 << endl;
+	num = 30;
 }
 
 //ex 12 pass by value
-void doubleIntValueVal(int &num)
+void doubleIntValueVal(int num)
 {
 	cout << num << " *2= " << num * 2 << endl;
 }
 
 //ex 13
-int main9()
+int main13()
 {
 	//string deetsToBeWritten ="";
 	string fileName;
@@ -309,17 +334,57 @@ int main9()
 	return 0;
 }
 
+void display(ostream out)
+{
+	cout << "helo world";
+}
+
+//ex 13.1
+int main131() {
+	string name;
+	cout << "enter name: " << endl;
+	getline(cin, name);
+	cout << "enter final grade: " << endl;
+	int fg, ca,grade;
+	cin >> fg;
+	cout << "enter ca:" << endl;
+	cin >> ca;
+	cin.ignore();
+	string fileName;
+	fileName = "C:\\Users\\paddy\\Desktop\\testfiles\\testing" ;
+
+	ofstream out(fileName);
+
+	if (out)
+	{		
+		grade = (fg * 0.6) + (ca *0.4);
+		out << grade << " " << name << endl;
+		out.close();
+	}
+	else
+	{
+		cout << "error opening file" << endl;
+	}
+	return 0;
+}
+
+
+
+
+
 //ex14
-int main()
+int main14()
 {
 	//append a int to a string
 	//op = name + std::to_string(num);
 	
 	
 	string op = "";
-	cout << "enter value to go to (1,000,000 max)" << endl;
-	int maxValue;
-	cin >> maxValue;
+	int maxValue = 2000000 ;
+	while (maxValue <= 0 || maxValue > 1000000) {
+		cout << "enter value to go to (1,000,000 max)" << endl;
+		cin >> maxValue;
+	}
 	int halfValue = maxValue / 2;
 	if(maxValue %2 != 0)
 	{
@@ -339,7 +404,6 @@ int main()
 	*/
 	for (int i = 1; i <= halfValue; i++)
 	{
-
 		//cout << i << " * " << i << " = " << squareNumbers(i) << "     ";
 		op = to_string(i) + " * " + to_string(i) + " = " + to_string(squareNumbers(i));
 		cout << StringPadding(op, 25);
@@ -351,9 +415,25 @@ int main()
 	system("pause");
 	return 0;
 }
-
+//ex14
 string StringPadding(string original, size_t charCount)
 {
 	original.resize(charCount, ' ');
 	return original;
+}
+//ex14
+int main() {
+	int maxValue = 2000000;
+	while (maxValue <= 0 || maxValue > 1000000) {
+		cout << "enter value to go to (1,000,000 max)" << endl;
+		cin >> maxValue;
+	}
+
+	for (int i = 1; i <= maxValue; i++)
+	{
+		cout << setw(9) << i << " " << squareNumbers(i) << endl;
+	}
+
+	system("pause");
+	return 0;
 }

@@ -1,0 +1,7 @@
+﻿  Main.cpp
+c:\college\year 3\c++\projects\week2exercisesexceptions\week2exercisesexceptions\main.cpp(98): warning C4101: 'a': unreferenced local variable
+c:\college\year 3\c++\projects\week2exercisesexceptions\week2exercisesexceptions\main.cpp(98): warning C4101: 'e': unreferenced local variable
+c:\college\year 3\c++\projects\week2exercisesexceptions\week2exercisesexceptions\main.cpp(98): warning C4101: 'b': unreferenced local variable
+c:\college\year 3\c++\projects\week2exercisesexceptions\week2exercisesexceptions\main.cpp(98): warning C4101: 'c': unreferenced local variable
+c:\college\year 3\c++\projects\week2exercisesexceptions\week2exercisesexceptions\main.cpp(98): warning C4101: 'd': unreferenced local variable
+  Week2ExercisesExceptions.vcxproj -> C:\College\Year 3\C++\projects\Week2ExercisesExceptions\Debug\Week2ExercisesExceptions.exe

@@ -1,5 +1,6 @@
 ﻿  Main.cpp
-c:\college\year 3\c++\projects\week2exercises\week2exercises\main.cpp(109): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\college\year 3\c++\projects\week2exercises\week2exercises\main.cpp(286): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\college\year 3\c++\projects\week2exercises\week2exercises\main.cpp(209): warning C4715: 'longestString': not all control paths return a value
+c:\college\year 3\c++\projects\week2exercises\week2exercises\main.cpp(116): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\college\year 3\c++\projects\week2exercises\week2exercises\main.cpp(311): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\college\year 3\c++\projects\week2exercises\week2exercises\main.cpp(360): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\college\year 3\c++\projects\week2exercises\week2exercises\main.cpp(216): warning C4715: 'longestString': not all control paths return a value
   Week2Exercises.vcxproj -> C:\College\Year 3\C++\projects\Week2Exercises\Debug\Week2Exercises.exe
