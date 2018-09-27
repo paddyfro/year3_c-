@@ -5,6 +5,7 @@
 #include <vector>
 #include <list>
 #include <algorithm>
+#include <cmath>
 
 
 using std::cout;
@@ -17,6 +18,7 @@ using std::vector;
 using std::list;
 using std::sort;
 using std::greater;
+using std::pow;
 
 void examp01();
 void vectorPrint(vector<int> vect);
@@ -29,6 +31,11 @@ void examp06();
 double getMedian(vector<int> nums);
 void examp07();
 void print(const vector<int> &nums, const string prompt);
+void examp08();
+void getStdDev(vector<int> nums, double mean);
+double getAverage(vector<int> nums);
+void readInVectorInt(vector<int> &vect, string fileName);
+void examp09();
 
 
 int main() {
@@ -57,6 +64,12 @@ int main() {
 		break;
 	case 7:
 		examp07();
+		break;
+	case 8:
+		examp08();
+		break;
+	case 9:
+		examp09();
 		break;
 	default:
 		cout << "dont no have exercise of that number (1-20)" << endl;
@@ -343,4 +356,89 @@ void print(const vector<int> &nums, const string prompt)
 	for (unsigned i = 0; i < nums.size(); i++)
 		cout << ' ' << nums.at(i);
 	cout << '\n';
+}
+
+void examp08() {
+	//https://www.mathsisfun.com/data/standard-deviation-formulas.html
+	/*
+	Step 1. Work out the mean
+	Step 2. Then for each number: subtract the Mean and square the result
+	Step 3. Then work out the mean of those squared differences.
+	Step 4. Take the square root of that:
+
+	9, 2, 5, 4, 12, 7, 8, 11, 9, 3, 7, 4, 12, 5, 4, 10, 9, 6, 9, 4
+	*/
+	vector<int> numbers;
+	string fileName = "ex08.txt";
+	readInVectorInt(numbers, fileName);
+	//print(numbers, "test read in ex08");
+	double mean = getAverage(numbers);
+	cout << "mean: " << mean << endl;
+	getStdDev(numbers, mean);
+
+
+}
+
+void getStdDev(vector<int> nums, double mean) {
+	int num;
+	vector<int> numsSquared;
+	for (vector<int>::size_type i = 0; i < nums.size(); i++)
+	{
+		numsSquared.push_back(pow((nums[i] - mean), 2));
+	}
+
+	//print(numsSquared, "nums squared vector");
+	double stdDev;
+	stdDev = getAverage(numsSquared);
+
+	cout << "variance: " << stdDev << endl;
+
+	cout << "Standard Deviation: " << sqrt(stdDev)<< endl;
+
+}
+
+double getAverage(vector<int> nums) {
+	int total =0;
+	for (vector<int>::size_type i = 0; i < nums.size(); i++)
+	{
+		total += nums[i];
+	}
+	return (double)total / nums.size();
+}
+
+void readInVectorInt(vector<int> &vect, string fileName) {
+	int num;
+	ifstream in(fileName);
+	if (in) {
+		while (!in.eof())
+		{
+			in >> num;
+			vect.push_back(num);
+		}
+		cout << "file read A-ok!" << endl;
+	}
+	else {
+		cout << "error opening file" << endl;
+	}
+}
+
+void examp09()
+{
+	vector<string> monthVector;
+	monthVector.push_back("Jan");
+	monthVector.push_back("Apr");
+	monthVector.push_back("May");
+	monthVector.push_back("Sept");
+	monthVector.push_back("Nov");
+	monthVector.push_back("Dec");
+
+	string missingMonths [] = { "Feb", "Mar", "Jun", "Jul", "Aug", "Oct" };
+
+	for (vector<string>::iterator iter = monthVector.begin(); iter != monthVector.end(); iter++)
+	{
+		//*iter
+		
+	}
+
+
 }
