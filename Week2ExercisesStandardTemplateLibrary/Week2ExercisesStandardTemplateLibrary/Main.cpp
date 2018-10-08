@@ -36,6 +36,27 @@ void getStdDev(vector<int> nums, double mean);
 double getAverage(vector<int> nums);
 void readInVectorInt(vector<int> &vect, string fileName);
 void examp09();
+void print1(vector<int> &nums);
+void print(vector<string> &nums);
+string::size_type getMaxLength(vector<string> a);
+void displayVectorStars(vector<string> words);
+void question9();
+bool areSame(const vector<int> &num1, const vector<int> &num2);
+void question10();
+int areSameUtil(const vector<int> &num1, const vector<int> &num2);
+void question12();
+bool areSameReverse(const vector<int> &num1, const vector<int> &num2);
+void question13();
+bool comp(string a, string b);
+bool compIgnoreCase(string &a, string &b);
+void question14();
+void interleave(const vector<int> &a, const vector<int> &b, vector<int> &c);
+void question15();
+void question16();
+void question17();
+void question18();
+void question19();
+void question20();
 
 
 int main() {
@@ -69,7 +90,28 @@ int main() {
 		examp08();
 		break;
 	case 9:
-		examp09();
+		question9();
+		break;
+	case 10:
+		question10();
+		break;
+	case 12:
+		question12();
+		break;
+	case 13:
+		question13();
+		break;
+	case 14:
+		question14();
+		break;
+	case 15:
+		question15();
+		break;
+	case 16:
+		question16();
+		break;
+	case 17:
+		question17();
 		break;
 	default:
 		cout << "dont no have exercise of that number (1-20)" << endl;
@@ -440,5 +482,240 @@ void examp09()
 		
 	}
 
+
+}
+
+string::size_type getMaxLength(vector<string> a) {
+	string::size_type max = 0;
+	for (string i : a) {
+		if (i.length() > max) {
+			max = i.length();
+		}
+	}
+	return max;
+}
+
+void displayVectorStars(vector<string> words) {
+
+	vector<string>::size_type max = getMaxLength(words);
+	string top(max + 4, '*');
+
+	cout << top << endl;
+
+	for (int i = 0; i < words.size(); i++) {
+		string::size_type diff = (max - words[i].length());
+
+		string::size_type padR = diff / 2;
+		string::size_type padL = diff - padR;
+
+
+
+		cout << "* " << string(padR, ' ') << words[i] << string(padL, ' ') << " *" << endl;
+
+	}
+	cout << top << endl;
+
+}
+
+void print1(vector<int> &nums) {
+
+	cout << "***** My Numbers *****" << endl;
+
+	for (vector<int>::size_type i = 0; i < nums.size(); i++) {
+		cout << nums[i] << endl;
+	}
+}
+
+void print(vector<string> &nums) {
+
+	cout << "***** My Numbers *****" << endl;
+
+	for (vector<int>::size_type i = 0; i < nums.size(); i++) {
+		cout << nums[i] << endl;
+	}
+}
+
+void question9() {
+
+	vector<string> months = { "Jan", "Apr", "May", "Sept", "Nov","Dec" };
+
+	vector<string>::iterator iter = months.begin();
+	iter++;
+	iter = months.insert(iter, "Feb") + 1;
+	iter = months.insert(iter, "Mar") + 3;
+	iter = months.insert(iter, "Jun") + 1;
+	iter = months.insert(iter, "Jul") + 1;
+	iter = months.insert(iter, "Aug") + 2;
+	iter = months.insert(iter, "Oct");
+
+	print(months);
+}
+
+bool areSame(const vector<int> &num1, const vector<int> &num2) {
+
+	if (num1.size() != num2.size()) {
+		return false;
+	}
+
+	vector<int> num1Copy(num1);
+	vector<int> num2Copy(num2);
+
+
+
+	sort(num1Copy.begin(), num1Copy.end());
+	sort(num2Copy.begin(), num2Copy.end());
+
+	for (int i = 0; i < num1Copy.size(); i++) {
+		if (num1Copy[i] != num2Copy[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+void question10() {
+
+	vector<int> num1 = { 3,2,3,4,5 };
+	vector<int> num2 = { 5,4,3,2,3 };
+
+	cout << areSame(num1, num2) << endl;
+
+}
+
+int areSameUtil(const vector<int> &num1, const vector<int> &num2) {
+
+	vector<int>::size_type min = num1.size() < num2.size() ? num1.size() : num2.size();
+
+	for (int i = 0; i < min; i++) {
+		if (num1[i] != num2[i]) {
+			return i - 1;
+		}
+	}
+	return min - 1;
+}
+
+
+void question12() {
+
+	vector<int> num1 = { 1,2,3,4,5 };
+	vector<int> num2 = { 1,2,3,5,5 };
+
+	cout << areSameUtil(num1, num2) << endl;
+
+}
+
+
+bool areSameReverse(const vector<int> &num1, const vector<int> &num2) {
+
+	if (num1.size() != num2.size()) {
+		return false;
+	}
+
+	vector<int>::size_type end = num2.size() - 1;
+
+	for (int i = 0; i < num1.size(); i++) {
+		if (num1[i] != num2[end - i]) {
+			return false;
+		}
+	}
+	return true;
+}
+void question13() {
+
+	vector<int> num1 = { 1,2,3,4,5 };
+	vector<int> num2 = { 5,4,3,2,1 };
+
+	cout << areSameReverse(num1, num2) << endl;
+
+}
+
+bool comp(string a, string b) {
+	return a.length() > b.length();
+}
+
+bool compIgnoreCase(string &a, string &b) {
+
+	string aCopy, bCopy;
+
+	for (char c : a) {
+		aCopy += tolower(c);
+	}
+	for (char c : b) {
+		bCopy += tolower(c);
+	}
+
+	return aCopy < bCopy;
+}
+
+void question14() {
+
+	vector<string> words = { "one","two","three","Four","five","six","seven","Eight","nine","ten","apple", };
+
+	sort(words.begin(), words.end(), compIgnoreCase);
+
+	for (int i = 0; i < words.size(); i++) {
+		cout << words[i] << endl;
+	}
+
+}
+
+void interleave(const vector<int> &a, const vector<int> &b, vector<int> &c) {
+
+	vector<int>::size_type max = a.size() > b.size() ? a.size() : b.size();
+
+	for (int i = 0; i < max; i++) {
+		if (i < a.size()) {
+			c.push_back(a[i]);
+		}
+		if (i < b.size()) {
+			c.push_back(b[i]);
+		}
+	}
+
+
+}
+
+void question15() {
+
+	vector<int> num1 = { 1,2,3,4,5 };
+	vector<int> num2 = { 1,2,3,5,5 };
+	vector<int> num3;
+
+	interleave(num1, num2, num3);
+
+	for (int i : num3) {
+		cout << i << endl;
+	}
+
+
+}
+
+void question16() {
+
+	string line;
+	vector<string> words = { "one","two","three","Four","five","six","seven","Eight","nine","ten","apple", };
+
+	displayVectorStars(words);
+
+	/*do {
+		cout << "Enter Word: " << endl;
+
+	}
+	*/
+
+}
+
+void question17() {
+
+}
+
+void question18() {
+
+}
+
+void question19() {
+
+}
+void question20() {
 
 }
