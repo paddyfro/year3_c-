@@ -1,0 +1,16 @@
+plain eggs
+1.45
+bacon and egg
+2.45
+muffin
+0.99
+french toast
+1.99
+fruit basket
+2.49
+cereal
+0.69
+coffee
+0.50
+tea
+0.75
